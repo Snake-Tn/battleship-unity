@@ -21,7 +21,6 @@ public class UnitPositionner : MonoBehaviour, IDragHandler, IEndDragHandler, IBe
         if (!isPositioned) {
             transform.localPosition = initialPosition;
         }
-        Debug.Log("end drag");
     }
 
     public void SetIsPositionned() {
@@ -30,7 +29,12 @@ public class UnitPositionner : MonoBehaviour, IDragHandler, IEndDragHandler, IBe
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
         GetComponent<CanvasGroup>().blocksRaycasts = false;
+    }
+
+
+    public void Start()
+    {
+        initialPosition = transform.localPosition;
     }
 }
