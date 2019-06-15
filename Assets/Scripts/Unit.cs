@@ -9,18 +9,17 @@ public class Unit : MonoBehaviour
     {
         if (!HasAcceptablePosition()) {
             GetComponent<Image>().color = Color.red;
-            Debug.Log(GetComponent<Image>().color);
-
         }
         else {
             GetComponent<Image>().color = Color.white;
         }
+        GameObject.Find("start-btn").GetComponent<StartButton>().UpdateStatus();
     }
     public int Size;
 
     public int Orientation = 1;
 
-    private Coordination getCoordination() {
+    public Coordination GetCoordination() {
 
         float xCenter = transform.localPosition.x + 150;
         float yCenter = transform.localPosition.y + 150;
@@ -79,8 +78,10 @@ public class Unit : MonoBehaviour
 
     public bool HasAcceptablePosition()
     {
-        Coordination coordination = getCoordination();
-        Debug.Log(coordination.x);
+        if (isCollidingWithOtherUnit()) {
+            return false;
+        }
+        Coordination coordination = GetCoordination();
         if(coordination.x<=0 || coordination.y<=0 || coordination.x>7 || coordination.y > 7) {
             return false;
         }
@@ -99,8 +100,72 @@ public class Unit : MonoBehaviour
         {
             return true;
         }
-        return false;
 
+        return false;
+    }
+
+    private bool isCollidingWithOtherUnit() {
+        GameObject[] units;
+        units = GameObject.FindGameObjectsWithTag("player-unit");
+        foreach(GameObject unit in units) {
+            if (unit.Equals(gameObject)) {
+                continue;
+            }
+
+            Coordination oCoordination = unit.GetComponent<Unit>().GetCoordination();
+            Coordination cCoordination = GetCoordination();
+            int oSize = unit.GetComponent<Unit>().Size;
+            int oOrientation = unit.GetComponent<Unit>().Orientation;
+            int cx = cCoordination.x;
+            int cy = cCoordination.y;
+            int ox ;
+            int oy ;
+            for (int cIndex = 0; cIndex < Size; cIndex++) {
+                 ox = oCoordination.x;
+                 oy = oCoordination.y;
+                for (int oIndex = 0; oIndex < oSize; oIndex++)
+                {                   
+                    if (cx == ox && cy == oy) {
+                        return true;
+                    }
+                    if (oOrientation == 1)
+                    {
+                        oy++;
+                    }
+                    if (oOrientation == 2)
+                    {
+                        ox--;
+                    }
+                    if (oOrientation == 3)
+                    {
+                        oy--;
+                    }
+                    if (oOrientation == 4)
+                    {
+                        ox++;
+                    }
+                }
+
+                if (Orientation == 1)
+                {
+                    cy++;
+                }
+                if (Orientation == 2)
+                {
+                    cx--;
+                }
+                if (Orientation == 3)
+                {
+                    cy--;
+                }
+                if (Orientation == 4)
+                {
+                    cx++;
+                }
+            }
+
+        }
+        return false;
     }
 
 }

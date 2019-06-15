@@ -7,6 +7,9 @@ public class SlotPopulator : MonoBehaviour,IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
+        if (eventData.pointerDrag.GetComponent<UnitPositionner>().IsFrozen) {
+            return;
+        }
         Vector3 mousePosition = transform.InverseTransformPoint(Input.mousePosition);
 
         int unitSize = eventData.pointerDrag.GetComponent<Unit>().Size;

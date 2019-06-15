@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f38b2784d0fc48a29fc2a248161abfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsFrozen: 0
 --- !u!225 &833448891658964550
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -195,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: 0
-  Direction: 0
+  Orientation: 1
 --- !u!1 &5011741871285972061
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +211,7 @@ GameObject:
   - component: {fileID: 1715671754133676788}
   m_Layer: 5
   m_Name: Rotator
-  m_TagString: Untagged
+  m_TagString: unit-rotator-btn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
