@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class StartButton : MonoBehaviour
 {
-
+    public GameController gameController;
     public void UpdateStatus()
     {
         GameObject[] units;
@@ -18,12 +18,13 @@ public class StartButton : MonoBehaviour
             }
         }
         GetComponent<Button>().interactable = active;
+        GetComponent<Button>().GetComponentInChildren<Text>().enabled = active;
     }
 
     public void OnClick() {
         GameObject[] units;
         units = GameObject.FindGameObjectsWithTag("player-unit");
-       
+        
         foreach (GameObject unit in units)
         {
             unit.transform.SetParent(GameObject.Find("PlayerBoard").transform);
@@ -40,6 +41,8 @@ public class StartButton : MonoBehaviour
 
         }
 
-        GameObject.Find("UnitSelection").GetComponent<Animator>().SetTrigger("selection-complete");        
+        GameObject.Find("UnitSelection").GetComponent<Animator>().SetTrigger("selection-complete");
+
+        gameController.GetComponent<GameController>().InitBoard();
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - player-unit
   - unit-rotator-btn
+  - opponent-slot
   layers:
   - Default
   - TransparentFX

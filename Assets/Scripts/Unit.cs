@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
@@ -15,6 +13,7 @@ public class Unit : MonoBehaviour
         }
         GameObject.Find("start-btn").GetComponent<StartButton>().UpdateStatus();
     }
+
     public int Size;
 
     public int Orientation = 1;

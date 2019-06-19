@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoardGenerator : MonoBehaviour
 {
     public GameObject playerSlotPrefab;
-    public GameObject apponentSlotPrefab;
+    public GameObject opponentSlotPrefab;
 
     public GameObject playerBoard;
     public GameObject opponentBoard;
@@ -15,7 +15,7 @@ public class BoardGenerator : MonoBehaviour
     void Start()
     {
         GenerateBoard(playerBoard.transform, playerSlotPrefab);
-        GenerateBoard(opponentBoard.transform, apponentSlotPrefab);
+        GenerateBoard(opponentBoard.transform, opponentSlotPrefab);
     }
 
     private void GenerateUnitsSelection() { 
