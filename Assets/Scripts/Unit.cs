@@ -6,10 +6,10 @@ public class Unit : MonoBehaviour
     public void UpdateColor()
     {
         if (!HasAcceptablePosition()) {
-            GetComponent<Image>().color = Color.red;
+            GetComponent<Image>().color = new Color(0.8f, 0f, 0f, 0.6f);
         }
         else {
-            GetComponent<Image>().color = Color.white;
+            GetComponent<Image>().color = new Color(0.14f, 0.14f, 0.14f,0.8f);
         }
         GameObject.Find("start-btn").GetComponent<StartButton>().UpdateStatus();
     }

@@ -1,15 +1,23 @@
-mergeInto(LibraryManager.library, {
+JSWebSocket = {
 
-    connectionsPool: [],
+    $connection : {},
 
-    WSConnect: function () {
-        conn = new WebSocket('ws://localhost:8080');
-        connectionsPool.push(conn);
+    JSConnect: function () {
+        console.log("JSCONNECT EXEC");
+        connection = new WebSocket(config.ws_url);
+
+        connection.onmessage = function (message) {
+            console.log("MSG RECEIVED, MSG: " + message);
+            SendMessage('WebSocket', 'OnMessage', message);
+        }
     },
 
-    WSSend: function () {
-        window.alert("Hello, world!");
-    },
+    JSSend: function (message) {
 
+        console.log("JSSEND EXEC, MSG:" + message);
+        connection.send(message)
+    }
 
-});
+};
+autoAddDeps(JSWebSocket, '$connection');
+mergeInto(LibraryManager.library,JSWebSocket);

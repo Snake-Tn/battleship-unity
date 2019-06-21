@@ -5,30 +5,27 @@ using System.Runtime.InteropServices;
 
 public class WebSocket : MonoBehaviour
 {
-    public void Send() { 
-    }
 
-    public void Connect() {
-        Debug.Log("CONNECT!");
-    }
+    public NetworkController NetworkController;
 
     [DllImport("__Internal")]
-    private static extern void Hello();
+    private static extern void JSConnect();
 
-    public void ExecHello() {
-        Hello();
+    [DllImport("__Internal")]
+    private static extern void JSSend(string msg);
+
+    public void Connect()
+    {
+        Debug.Log("CONNECT!");
+        JSConnect();
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void Send(string msg) {
+        JSSend(msg);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void OnMessage(string message) {
+        Debug.Log(message);
+        NetworkController.OnMessage(message);
     }
 }

@@ -1,1 +1,29 @@
-﻿{"type":"opponent-finish-board-init", "content":{}}
+﻿{
+  "type": "player-shoot-impact",
+  "hits": [
+    {
+      "x": 1,
+      "y": 1
+    }
+  ],
+  "misses": [
+    {
+      "x": 6,
+      "y": 1
+    }
+  ],
+  "destroyed_units": [
+  
+  {
+     "size": 3,
+     "position": {"x":3,"y":2},
+     "orientation": "n"
+  },
+    {
+     "size": 5,
+     "position": {"x":1,"y":1},
+     "orientation": "e"
+  }
+
+  ]
+}

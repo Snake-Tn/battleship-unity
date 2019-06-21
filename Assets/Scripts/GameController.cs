@@ -7,9 +7,16 @@ using UnityEngine.Events;
 public class GameController : MonoBehaviour
 {
     public NetworkController NetworkController;
+    public GameObject DestroyedUnitPrefab;
+    public Transform PlayerBoard;
+    public Transform OpponentBoard;
 
     bool freeToFire = false;
     bool boardInitCompleted = false;
+
+    int executedShoots = 0;
+    int receivedShootsCount = 0;
+    Stack<ShootImpactDto> receivedShoots = new Stack<ShootImpactDto>();
 
     public void InitBoard() {
         boardInitCompleted = true;
@@ -39,10 +46,31 @@ public class GameController : MonoBehaviour
     }
 
     public void ExecutShoot(Coordination coordination) {
-        freeToFire = false;
+
         GameObject.Find("fire-btn").GetComponent<Button>().interactable = false;
         ExecShootDto execShootDto = new ExecShootDto(coordination);
         NetworkController.Send(JsonUtility.ToJson(execShootDto));
+        executedShoots++;
+        if (executedShoots == 3)
+        {
+            freeToFire = false;
+            executedShoots = 0;
+            GameObject.Find("FireBoard").GetComponent<Animator>().SetTrigger("shoot-executed");
+        }
+    }
+
+    public void AfterExecutShoot() {
+        Debug.Log("AfterExecutShoot");
+        foreach (ShootImpactDto shootImpact in receivedShoots.ToArray()) {
+            DrawShootImpact(shootImpact, "player-slot");
+        }
+        receivedShoots.Clear();
+        if (receivedShootsCount == 3 && !freeToFire)
+        {
+            freeToFire = true;
+            receivedShootsCount = 0;
+            YourTurn();
+        }
     }
 
     public void OpponentFinishedBoardInit() {
@@ -57,13 +85,96 @@ public class GameController : MonoBehaviour
         GameObject.Find("FireBoard").GetComponent<Animator>().SetTrigger("free-to-fire");
     }
 
-    public void OpponentShootImpact(string msg) {
-        
+    private void DrawShootImpact(ShootImpactDto shootImpactDto, string slotsTag) {
+        GameObject[] slots = GameObject.FindGameObjectsWithTag(slotsTag);
+        foreach (GameObject slot in slots)
+        {
+            foreach (Coordination hit in shootImpactDto.hits)
+            {
+                Coordination c = slot.GetComponent<Slot>().Coordination;
+                if (c.x == hit.x && c.y == hit.y)
+                {
+                    slot.GetComponent<Slot>().SetIsHit();
+                }
+            }
+        }
+
+        foreach (GameObject slot in slots)
+        {
+            foreach (Coordination hit in shootImpactDto.misses)
+            {
+                Coordination c = slot.GetComponent<Slot>().Coordination;
+                if (c.x == hit.x && c.y == hit.y)
+                {
+                    slot.GetComponent<Slot>().SetIsMiss();
+                }
+            }
+        }
     }
-    public void PlayerShootImpact(string msg)
+
+    public void OpponentShootImpact(ShootImpactDto shootImpactDto) {
+        if (freeToFire)
+        {
+            receivedShoots.Push(shootImpactDto);            
+        }
+        else {
+            DrawShootImpact(shootImpactDto, "player-slot");
+        }
+        
+        receivedShootsCount++;
+        if (receivedShootsCount ==3 && !freeToFire) {
+            freeToFire = true;
+            receivedShootsCount = 0;
+            YourTurn();
+        }
+        DrawDestroyedUnits(shootImpactDto.destroyed_units, PlayerBoard);
+    }
+
+    public void PlayerShootImpact(ShootImpactDto shootImpactDto)
     {
         GameObject.Find("fire-btn").GetComponent<Button>().interactable = true;
+        DrawShootImpact(shootImpactDto, "opponent-slot");
+        DrawDestroyedUnits(shootImpactDto.destroyed_units, OpponentBoard);
     }
+
+    public void DrawDestroyedUnits(UnitDto[] units, Transform board) {
+        float width = DestroyedUnitPrefab.GetComponent<RectTransform>().rect.width;
+        foreach (UnitDto unitDto in units) {
+            float distanceToBackCenter = width * (((float)unitDto.size / 2) - 0.5f);
+            Debug.Log(distanceToBackCenter);
+
+            float xCenter = (unitDto.position.x - 4) * width;
+            float yCenter = (unitDto.position.y - 4) * width;
+            Debug.Log(yCenter);
+            float rotation = 0;
+            if (unitDto.orientation == "n")
+            {
+                yCenter += distanceToBackCenter;
+            }
+            if (unitDto.orientation == "w")
+            {
+                rotation = 90;
+                xCenter -= distanceToBackCenter;
+            }
+            if (unitDto.orientation == "s")
+            {
+                rotation = 180;
+                yCenter -= distanceToBackCenter;
+            }
+            if (unitDto.orientation == "e")
+            {
+                rotation = 270;
+                xCenter += distanceToBackCenter;
+            }
+            
+            GameObject unitGameObject = Instantiate(DestroyedUnitPrefab, Vector3.zero, Quaternion.identity);
+            unitGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(width, width * unitDto.size);
+            unitGameObject.GetComponent<RectTransform>().localPosition = new Vector3(xCenter, yCenter, 0);
+            unitGameObject.GetComponent<RectTransform>().Rotate(Vector3.forward, rotation);
+            unitGameObject.transform.SetParent(board,false);
+        }
+    }
+
 
     private string mapOrientation(int orientation) {
         switch (orientation) {
@@ -77,5 +188,13 @@ public class GameController : MonoBehaviour
                 return "e";
         }
         throw new System.Exception();
+    }
+
+    public void YouLost() {
+        GameObject.Find("Gameover").GetComponent<Animator>().SetTrigger("gameover");
+
+    }
+    public void YouWon() {
+        GameObject.Find("Gameover").GetComponent<Animator>().SetTrigger("gameover");
     }
 }

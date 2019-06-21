@@ -8,7 +8,7 @@ public class FireSlotSelector : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private Coordination firePosition;
 
     public bool IsSelected = false;
-    public bool IsHit = false;
+    public bool ToHit = false;
     
 
     public void OnPointerClick(PointerEventData eventData)
@@ -16,7 +16,7 @@ public class FireSlotSelector : MonoBehaviour, IPointerEnterHandler, IPointerExi
         initAll();
         firePosition = GetComponent<Slot>().Coordination;
         IsSelected = true;
-        GetComponent<Image>().color = Color.red;
+        GetComponent<Image>().color = Color.gray;
         Debug.Log(firePosition.x);
         Debug.Log(firePosition.y);
         GameObject.Find("fire-btn").GetComponent<Button>().interactable = true;
@@ -24,15 +24,16 @@ public class FireSlotSelector : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (IsHit) {
+        if (ToHit) {
             return;
         }
-        GetComponent<Image>().color = Color.red ;
+        GetComponent<Image>().color = Color.gray ;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (IsHit){
+        if (ToHit)
+        {
             return;
         }
         if (!IsSelected) {
@@ -44,7 +45,7 @@ public class FireSlotSelector : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private void initAll() {
         GameObject[] slots = GameObject.FindGameObjectsWithTag("opponent-slot");
         foreach (GameObject slot in slots) {
-            if (slot.GetComponent<FireSlotSelector>().IsHit) {
+            if (slot.GetComponent<FireSlotSelector>().ToHit) {
                 continue;
             }
             slot.GetComponent<FireSlotSelector>().IsSelected = false ;

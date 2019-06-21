@@ -7,6 +7,7 @@ public class NetworkController : MonoBehaviour
 
     public TextAsset testMessage;
     public GameController GameController;
+    public WebSocket WebSocket;
 
 
     public void Awake()
@@ -15,20 +16,17 @@ public class NetworkController : MonoBehaviour
     }
 
     public void Connect() {
-        Debug.Log("connect");
+        WebSocket.Connect();
     }
 
     public void Send(string msg) {
 
-        Debug.Log(msg);
+        WebSocket.Send(msg);
     }
 
     public void OnMessage(string msg) {
         Debug.Log(msg);
         IncomeMsgDto incomeMsgDto = JsonUtility.FromJson<IncomeMsgDto>(msg);
-        if (incomeMsgDto.type.Equals("your-turn")) {
-            GameController.YourTurn();
-        }
         if (incomeMsgDto.type.Equals("opponent-finish-board-init"))
         {
             GameController.OpponentFinishedBoardInit();
@@ -36,7 +34,25 @@ public class NetworkController : MonoBehaviour
 
         if (incomeMsgDto.type.Equals("player-shoot-impact"))
         {
-            GameController.PlayerShootImpact();
+            ShootImpactDto shootImpactDto = JsonUtility.FromJson<ShootImpactDto>(msg);            
+            GameController.PlayerShootImpact(shootImpactDto);
+        }
+
+        if (incomeMsgDto.type.Equals("opponent-shoot-impact"))
+        {
+            ShootImpactDto shootImpactDto = JsonUtility.FromJson<ShootImpactDto>(msg);
+            GameController.OpponentShootImpact(shootImpactDto);
+        }
+
+        if (incomeMsgDto.type.Equals("you-lost"))
+        {
+         
+            GameController.YouLost();
+        }
+        if (incomeMsgDto.type.Equals("you-won"))
+        {
+          
+            GameController.YouWon();
         }
     } 
 

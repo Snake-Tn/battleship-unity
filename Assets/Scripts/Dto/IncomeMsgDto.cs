@@ -2,7 +2,6 @@
 
 public class IncomeMsgDto
 {
-    public string type;
-    public Object content;
+    public string type;    
 }
 

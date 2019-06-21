@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 7365950517589187973}
   - component: {fileID: -3241609965004276512}
   m_Layer: 5
-  m_Name: Slot
-  m_TagString: Untagged
+  m_Name: PlayerSlot
+  m_TagString: player-slot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,3 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab7df71fb4ca48a2bc95f35a72298b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Coordination:
+    x: 0
+    y: 0

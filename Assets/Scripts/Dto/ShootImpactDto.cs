@@ -1,10 +1,11 @@
 ﻿using System;
 
-[Serializable]
+
 public class ShootImpactDto
 {
-    public ShootImpactDto()
-    {
-    }
+    public Coordination[] hits;
+    public Coordination[] misses;
+    public UnitDto[] destroyed_units;
+   
 }
 
