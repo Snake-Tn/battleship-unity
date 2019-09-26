@@ -1,5 +1,5 @@
 ﻿{
-  "type": "player-shoot-impact",
+  "type": "you-lost",
   "hits": [
     {
       "x": 1,

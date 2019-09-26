@@ -15,10 +15,20 @@ public class Slot : MonoBehaviour
     }
 
     public void SetIsHit() {
+        isHit = true;
         GetComponent<Image>().color = Color.red;
     }
 
     public void SetIsMiss() {
+        isMiss = true;
         GetComponent<Image>().color = Color.blue;
+    }
+
+    public bool IsHit() {
+        return isHit;
+    }
+    public bool IsMiss()
+    {
+        return isMiss;
     }
 }

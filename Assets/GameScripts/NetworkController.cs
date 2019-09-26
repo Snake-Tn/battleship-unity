@@ -27,6 +27,12 @@ public class NetworkController : MonoBehaviour
     public void OnMessage(string msg) {
         Debug.Log(msg);
         IncomeMsgDto incomeMsgDto = JsonUtility.FromJson<IncomeMsgDto>(msg);
+
+        if (incomeMsgDto.type.Equals("opponent-connected"))
+        {
+            GameController.OpponentConnected();
+        }
+
         if (incomeMsgDto.type.Equals("opponent-finish-board-init"))
         {
             GameController.OpponentFinishedBoardInit();

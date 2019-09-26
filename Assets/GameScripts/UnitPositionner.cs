@@ -22,12 +22,14 @@ public class UnitPositionner : MonoBehaviour, IDragHandler, IEndDragHandler, IBe
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.Log("OnEndDrag");
         if (IsFrozen)
         {
             return;
         }
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         if (!isPositioned) {
+            Debug.Log("!isPositioned");
             transform.localPosition = initialPosition;
             transform.localRotation = initialRotation;
             GetComponent<Unit>().Orientation = 1;

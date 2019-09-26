@@ -60,11 +60,6 @@ public class GameController : MonoBehaviour
     }
 
     public void AfterExecutShoot() {
-        Debug.Log("AfterExecutShoot");
-        foreach (ShootImpactDto shootImpact in receivedShoots.ToArray()) {
-            DrawShootImpact(shootImpact, "player-slot");
-        }
-        receivedShoots.Clear();
         if (receivedShootsCount == 3 && !freeToFire)
         {
             freeToFire = true;
@@ -113,13 +108,9 @@ public class GameController : MonoBehaviour
     }
 
     public void OpponentShootImpact(ShootImpactDto shootImpactDto) {
-        if (freeToFire)
-        {
-            receivedShoots.Push(shootImpactDto);            
-        }
-        else {
-            DrawShootImpact(shootImpactDto, "player-slot");
-        }
+        
+        DrawShootImpact(shootImpactDto, "player-slot");
+        
         
         receivedShootsCount++;
         if (receivedShootsCount ==3 && !freeToFire) {
@@ -192,9 +183,15 @@ public class GameController : MonoBehaviour
 
     public void YouLost() {
         GameObject.Find("Gameover").GetComponent<Animator>().SetTrigger("gameover");
+        GameObject.Find("Looser").GetComponent<Text>().enabled = true;
 
     }
     public void YouWon() {
         GameObject.Find("Gameover").GetComponent<Animator>().SetTrigger("gameover");
+        GameObject.Find("Winner").GetComponent<Text>().enabled=true;
+    }
+
+    public void OpponentConnected() {
+        GameObject.Find("UnitSelection").GetComponent<Animator>().SetTrigger("opponent-connected");
     }
 }

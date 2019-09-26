@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour
             GetComponent<Image>().color = new Color(0.8f, 0f, 0f, 0.6f);
         }
         else {
-            GetComponent<Image>().color = new Color(0.14f, 0.14f, 0.14f,0.8f);
+            GetComponent<Image>().color = new Color(0.33f, 0.33f, 0.49f,0.5f);
         }
         GameObject.Find("start-btn").GetComponent<StartButton>().UpdateStatus();
     }

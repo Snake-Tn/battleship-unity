@@ -2,25 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a024e34-10e6-48df-b441-5d3bb96208c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Animations/FireBtn.controller" beforeDir="false" afterPath="$PROJECT_DIR$/../Animations/FireBtn.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebSocket.jslib" beforeDir="false" afterPath="$PROJECT_DIR$/WebSocket.jslib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Prefab/PlayerSlot.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Prefab/PlayerSlot.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Prefab/Unit.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Prefab/Unit.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scripts/Dto/IncomeMsgDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Scripts/Dto/IncomeMsgDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scripts/Dto/InitBoardDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Scripts/Dto/InitBoardDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scripts/Dto/ShootImpactDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Scripts/Dto/ShootImpactDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scripts/FireButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Scripts/FireButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scripts/FireSlotSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Scripts/FireSlotSelector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Scripts/GameController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scripts/NetworkController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Scripts/NetworkController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scripts/Slot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Scripts/Slot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Scripts/Unit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Scripts/Unit.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scripts/Dto/ExecShootDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Scripts/Dto/ExecShootDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Scripts/WebSocket.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Scripts/WebSocket.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestMsg.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../TestMsg.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../../ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +18,7 @@
         <entry file="file://$PROJECT_DIR$/WebSocket.jslib">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+              <caret line="15" column="52" lean-forward="true" selection-start-line="15" selection-start-column="52" selection-end-line="15" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -115,16 +99,18 @@
       <workItem from="1560332957389" duration="2477000" />
       <workItem from="1560412787091" duration="270000" />
       <workItem from="1561062875458" duration="3064000" />
+      <workItem from="1561205381712" duration="4036000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6251000" />
+    <option name="totallyTimeSpent" value="10287000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17002882" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17291066" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -156,7 +142,7 @@
     <entry file="file://$PROJECT_DIR$/WebSocket.jslib">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <caret line="15" column="52" lean-forward="true" selection-start-line="15" selection-start-column="52" selection-end-line="15" selection-end-column="52" />
         </state>
       </provider>
     </entry>

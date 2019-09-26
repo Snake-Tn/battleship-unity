@@ -13,6 +13,9 @@ public class FireSlotSelector : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (GetComponent<Slot>().IsHit() || GetComponent<Slot>().IsMiss()) {
+            return;
+        }
         initAll();
         firePosition = GetComponent<Slot>().Coordination;
         IsSelected = true;

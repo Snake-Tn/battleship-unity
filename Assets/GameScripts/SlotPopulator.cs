@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class SlotPopulator : MonoBehaviour,IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
-    {
+    {        
         if (eventData.pointerDrag.GetComponent<UnitPositionner>().IsFrozen) {
             return;
         }
